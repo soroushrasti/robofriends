@@ -7,7 +7,7 @@ class App extends Component {
     constructor(){
         super();
         this.state={robots:robots ,
-        earchfield:''}
+        searchfield:' '}
     }
    render(){return (<div className='tc'>
        <h1>RoboFriends</h1>
