@@ -12,6 +12,8 @@ class App extends Component {
         searchfield:' '}
     }
 
+    
+
     componentDidMount(){
        // this.setState({robots:robots})
        fetch('https://jsonplaceholder.typicode.com/users')
@@ -25,9 +27,12 @@ class App extends Component {
    }
 
 render(){
-    const filteredrobots = this.state.robots.filter(robots => {return robots.name.toLowerCase().includes(this.state.searchfield.toLowerCase() ); });
+    const {robots,searchfield}=this.state
 
-    if(this.state.robots.length===0){
+    const filteredrobots = 
+    robots.filter(robots => {return robots.name.toLowerCase().includes(searchfield.toLowerCase() ); });
+
+    if(!robots.length){
         return <h1 className='tc'>Loading</h1>
     }else{
     
