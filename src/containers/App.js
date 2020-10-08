@@ -6,38 +6,30 @@ import './App.css'
 import Scroll from '../components/Scroll'
 import Errorboundry from '../components/Errorboundry'
 import {connect} from 'react-redux';
-import { setSearchField } from '../actions';
-
+import { requestRobots, setSearchField } from '../actions';
 
 const mapStateProps=state=>{
     return{
-        searchField:state.searchRobots.searchField
+        searchField:state.searchRobots.searchField,
+        robots: state.requestRobots.robots,
+        ispending: state.requestRobots.ispending,
+        error: state.requestRobots.error
     }
 }
 const mapDispatchToProps=(dispatch)=>{
     return{
-        onsearchChange:(event)=>{
-            dispatch(setSearchField(event.target.value))
-        }
+        onsearchChange:(event)=>dispatch(setSearchField(event.target.value)),
+            onRequestRobots:()=>dispatch(requestRobots())
+        
     }
 }
 
 
 
 class App extends Component {
-    constructor(){
-        super();
-        this.state={robots:[] ,
-        searchField:' '}
-    }
-
-    
 
     componentDidMount(){
-       // this.setState({robots:robots})
-       fetch('https://jsonplaceholder.typicode.com/users')
-       .then(response=> response.json())
-       .then(users=> {this.setState({robots:users})});
+      this.props.onRequestRobots();
     }
 
    onsearchChange=(event)=>{
@@ -46,16 +38,14 @@ class App extends Component {
    }
 
 render(){
-    const {robots}=this.state;
-    const {searchField, onsearchChange}=this.props;
+    const {searchField, onsearchChange,robots,ispending}=this.props;
     const filteredrobots = 
     robots.filter(robots => {return robots.name.toLowerCase().includes(searchField.toLowerCase() ); });
 
-    if(!robots.length){
-        return <h1 className='tc'>Loading</h1>
-    }else{
-    
-    return (<div className='tc'>
+        return ispending?
+        <h1 className='tc'>Loading</h1>
+    :(
+     <div className='tc'>
         <h1 className='f1' >RoboFriends</h1>
         <SearchBox searchChange={onsearchChange} />
         <Scroll>
@@ -63,7 +53,9 @@ render(){
         <CardList robots={filteredrobots} />
         </Errorboundry>
         </Scroll>
-        </div>);
-}}
+        </div>
+
+    );
+}
 }
 export default connect(mapStateProps,mapDispatchToProps)(App);
