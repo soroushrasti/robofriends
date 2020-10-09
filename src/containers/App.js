@@ -8,7 +8,7 @@ import Errorboundry from '../components/Errorboundry'
 import {connect} from 'react-redux';
 import { requestRobots, setSearchField } from '../actions';
 
-const mapStateProps=state=>{
+const mapStatetoProps=state=>{
     return{
         searchField:state.searchRobots.searchField,
         robots: state.requestRobots.robots,
@@ -58,4 +58,4 @@ render(){
     );
 }
 }
-export default connect(mapStateProps,mapDispatchToProps)(App);
+export default connect(mapStatetoProps,mapDispatchToProps)(App);
