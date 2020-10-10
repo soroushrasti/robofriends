@@ -2,9 +2,13 @@ import {CHANGE_SEARCH_FIELD, REQUEST_ROBOTS_PENDING,REQUEST_ROBOTS_SUCCESS,REQUE
 
 const initialStateRobots={
     ispending:false,
-    robots:[],
-    error:''
+    robots:[]
 }
+
+const initialStateSearch = {
+    searchField: ''
+  }
+
 
 
 export const requestRobots=(state=initialStateRobots,action={})=>{
@@ -20,11 +24,11 @@ export const requestRobots=(state=initialStateRobots,action={})=>{
     }
 }
 
-export const searchRobots=(state=initialStateRobots, action={})=>{
+export const searchRobots=(state=initialStateSearch, action={})=>{
     switch(action.type){
         case CHANGE_SEARCH_FIELD:
-            return Object.assign({},state,{searchField:action.payload});
+            return Object.assign({},state,{searchField:action.payload})
          default:
-             return state;   
+             return state  
     }
 }

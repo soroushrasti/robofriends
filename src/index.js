@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 //import CardList from './CardList'
 import 'tachyons'
-import * as serviceWorker from './serviceWorker';
-//import {robots} from './robots'
+import registerServiceWorker from './registerServiceWorker';
 import App from './containers/App.js'
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
@@ -15,10 +14,9 @@ import thunkMiddleware from 'redux-thunk';
 
 
 const logger= createLogger();
-const rootReducer=combineReducers({
-  searchRobots,requestRobots
-})
-const store = createStore(rootReducer,applyMiddleware(thunkMiddleware, logger));
+const rootReducers = combineReducers({requestRobots, searchRobots})
+
+const store = createStore(rootReducers,applyMiddleware(thunkMiddleware, logger));
 
 
 ReactDOM.render(
@@ -27,4 +25,6 @@ ReactDOM.render(
   </Provider>
   , document.getElementById('root')
 );
-serviceWorker.unregister();
+
+registerServiceWorker();
+

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import CardList from '../components/CardList';
-//import {robots} from './robots';
 import SearchBox from '../components/SearchBox'
 import './App.css'
 import Scroll from '../components/Scroll'
@@ -13,30 +12,18 @@ const mapStatetoProps=state=>{
         searchField:state.searchRobots.searchField,
         robots: state.requestRobots.robots,
         ispending: state.requestRobots.ispending,
-        error: state.requestRobots.error
     }
 }
 const mapDispatchToProps=(dispatch)=>{
     return{
         onsearchChange:(event)=>dispatch(setSearchField(event.target.value)),
-            onRequestRobots:()=>dispatch(requestRobots())
-        
+            onRequestRobots:()=>requestRobots(dispatch)       
     }
 }
-
-
-
 class App extends Component {
-
     componentDidMount(){
       this.props.onRequestRobots();
     }
-
-   onsearchChange=(event)=>{
-      this.setState({searchfield:event.target.value})
-
-   }
-
 render(){
     const {searchField, onsearchChange,robots,ispending}=this.props;
     const filteredrobots = 
