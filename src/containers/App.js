@@ -34,7 +34,7 @@ render(){
     :(
      <div className='tc'>
          <p className='f5'>Welcome to Soroush Rasti's portfolio website!</p>
-         <p className='f5'>This website employed CSS design, and React and Redux technologies to request and wrap the Robots from "https://jsonplaceholder.typicode.com" </p>
+         <p className='f5'>This website employed CSS, React and Redux technologies to request and wrap the Robots from "https://jsonplaceholder.typicode.com" </p>
         <h1 className='f1' >RoboFriends</h1>
         <SearchBox searchChange={onsearchChange} />
         <Scroll>
